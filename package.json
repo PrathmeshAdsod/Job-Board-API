@@ -1,0 +1,21 @@
+{
+  "name": "graphql-api",
+  "version": "1.0.0",
+  "description": "Creating API using GraphQL and MongoDB",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "author": "Prathmesh Adsod",
+  "license": "ISC",
+  "dependencies": {
+    "@apollo/server": "^4.9.4",
+    "apollo-server-express": "^3.12.1",
+    "express": "^4.18.2",
+    "graphql": "^16.8.1",
+    "mongoose": "^7.6.3",
+    "nodemon": "^3.0.1"
+  }
+}
