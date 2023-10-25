@@ -17,7 +17,22 @@ export const resolvers = {
       }).sort({ createdAt: -1 });
       return jobApplications;
     },
+    jobSeekerAccount: async () => {
+      const jobseekers = await JobSeekerAccount.find();
+      return jobseekers;
+    },
+
+    jobSeekerAccountByUsername: async (_, {jobSeekerUsername}) => {
+      const jobseekersbyac = await JobSeekerAccount.find({username: jobSeekerUsername});
+      return jobseekersbyac;
+    },
+
+    recruiterAccount: async() => {
+      const recruiter = await RecruiterAccount.find();
+      return recruiter;
+    }
   },
+
   Mutation: {
     createJobListing: async (_, args) => {
       const Job = await JobListing.create(args);
@@ -41,6 +56,18 @@ export const resolvers = {
       return updateJobSeeker;
     },
 
+    createRecruiterProfile: async (_, args) => {
+      const recruiter = await RecruiterAccount.create(args);
+      return recruiter;
+    },
+
+    updateRecruiterProfile: async (_, args) => {
+      const updateRecruiter = RecruiterAccount.findByIdAndUpdate(args.id, args, {
+        new: true,
+      });
+      return updateRecruiter;
+    },
+
     updateJobListing: async (_, args) => {
       const updateJob = JobListing.findByIdAndUpdate(args.id, args, {
         new: true,
@@ -48,7 +75,10 @@ export const resolvers = {
       return updateJob;
     },
 
-    deleteJobListing: (_, { id }) => JobListing.findByIdAndRemove(id),
+    deleteJobListing: async (_, { id }) => {
+      const deleteJobListing = await JobListing.findByIdAndRemove(id);
+      return deleteJobListing;
+    },
 
     updateJobApplicationStatus: (_, args) =>
       JobApplication.findByIdAndUpdate(

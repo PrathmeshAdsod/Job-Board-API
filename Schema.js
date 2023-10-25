@@ -53,8 +53,9 @@ type JobListing {
   type Query {
     jobListings: [JobListing]
     jobApplications(jobListingId: ID!): [JobApplication]
-    JobSeekerAccount: [JobSeekerAccount]
-    JobSeekerAccountByUsername(jobSeekerUsername: String!): [JobSeekerAccount]
+    jobSeekerAccount: [JobSeekerAccount]
+    jobSeekerAccountByUsername(jobSeekerUsername: String!): [JobSeekerAccount]
+    recruiterAccount: [RecruiterAccount]
   }
 
   type Mutation {
@@ -103,6 +104,27 @@ type JobListing {
         currentPosition: String,
         expectedSalary: Int
     ): JobSeekerAccount
+
+    createRecruiterProfile (
+      username: String!,
+      Name: String!,
+      email: String!,
+      phone: String!,
+      recruiter: Boolean!,
+      age: Int!,
+      company: String!,
+      hiring: Boolean
+    ): RecruiterAccount
+
+    updateRecruiterProfile (
+      id: ID!
+      Name: String,
+      email: String,
+      phone: String,
+      age: Int,
+      company: String,
+      hiring: Boolean
+    ): RecruiterAccount
 
     updateJobListing(id: ID!, title: String, description: String, location: String, applicationInstructions: String): JobListing
 
