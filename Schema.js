@@ -21,9 +21,40 @@ type JobListing {
     status: String
   }
 
+  type JobSeekerAccount {
+   id: ID!,
+   username: String!,
+   Name: String!,
+   email: String!,
+   phone: String!,
+   # job Seeker will be a button which user clicked then
+   # will be redirected to job seeker dashboard
+   jobSeeker: Boolean!,
+   age: Int!,
+   yearsOfExperience: Int,
+   openToWork: Boolean,
+   currentCompany: String,
+   currentPosition: String,
+   expectedSalary: Int,
+  }
+
+
+  type  RecruiterAccount {
+    username: String!,
+    Name: String!,
+    email: String!,
+    phone: String!,
+    recruiter: Boolean!,
+    age: Int!,
+    company: String!,
+    hiring: Boolean
+  }
+
   type Query {
     jobListings: [JobListing]
     jobApplications(jobListingId: ID!): [JobApplication]
+    JobSeekerAccount: [JobSeekerAccount]
+    JobSeekerAccountByUsername(jobSeekerUsername: String!): [JobSeekerAccount]
   }
 
   type Mutation {
@@ -35,10 +66,6 @@ type JobListing {
       applicationInstructions: String!
     ): JobListing
 
-    updateJobListing(id: ID!, title: String, description: String, location: String, applicationInstructions: String): JobListing
-
-    deleteJobListing(id: ID!): JobListing
-
     applyForJob(
       jobListingId: String
       company: String!
@@ -48,6 +75,38 @@ type JobListing {
       resume: String!
       status: String
     ): JobApplication
+
+    createJobSeekerProfile (
+      username: String!,
+      Name: String!,
+      email: String!,
+      phone: String!,
+      # job Seeker will be a button which user clicked then
+      # will be redirected to job seeker dashboard
+      jobSeeker: Boolean!,
+      age: Int!,
+      yearsOfExperience: Int,
+      openToWork: Boolean,
+      currentCompany: String,
+      currentPosition: String,
+      expectedSalary: Int,
+    ): JobSeekerAccount
+    
+    updateJobSeekerProfile(
+        id: ID!, Name: String,
+        email: String,
+        phone: String,
+        age: Int,
+        yearsOfExperience: Int,
+        openToWork: Boolean,
+        currentCompany: String,
+        currentPosition: String,
+        expectedSalary: Int
+    ): JobSeekerAccount
+
+    updateJobListing(id: ID!, title: String, description: String, location: String, applicationInstructions: String): JobListing
+
+    deleteJobListing(id: ID!): JobListing
 
     updateJobApplicationStatus(id: ID!, status: String!): JobApplication
   }
