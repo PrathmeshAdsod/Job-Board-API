@@ -12,6 +12,9 @@ type JobListing {
   type JobApplication {
     id: ID!
     jobListing: JobListing!
+    jobListingId: String
+    title: String!
+    company: String!
     name: String!
     email: String!
     resume: String!        # URL to resume uploaded in cloud
@@ -37,10 +40,13 @@ type JobListing {
     deleteJobListing(id: ID!): JobListing
 
     applyForJob(
-      jobListingId: ID!
+      jobListingId: String
+      company: String!
+      title: String!
       name: String!
       email: String!
       resume: String!
+      status: String
     ): JobApplication
 
     updateJobApplicationStatus(id: ID!, status: String!): JobApplication
