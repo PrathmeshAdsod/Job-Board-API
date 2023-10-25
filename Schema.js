@@ -35,7 +35,7 @@ type JobListing {
       applicationInstructions: String!
     ): JobListing
 
-    updateJobListing(id: ID!, title: String, description: String): JobListing
+    updateJobListing(id: ID!, title: String, description: String, location: String, applicationInstructions: String): JobListing
 
     deleteJobListing(id: ID!): JobListing
 

@@ -24,8 +24,11 @@ export const resolvers = {
       return application;
     },
 
-    updateJobListing: (_, args) =>
-      JobListing.findByIdAndUpdate(args.id, args, { new: true }),
+    updateJobListing: async (_, args) => {
+      const updateJob = JobListing.findByIdAndUpdate(args.id, args, { new: true });
+      return updateJob;
+    },
+
     deleteJobListing: (_, { id }) => JobListing.findByIdAndRemove(id),
     
     updateJobApplicationStatus: (_, args) =>
